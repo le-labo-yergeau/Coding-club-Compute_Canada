@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+data/.DS_Store
+/docs
+src/data-prep.R
+data/raw-materials
