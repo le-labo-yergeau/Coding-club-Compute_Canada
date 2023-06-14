@@ -30,8 +30,6 @@ rm(meta_path)
 print('concluded data cleaning... Starting DA')
 # ------------------ Differential analysis ------------------
 
-countData <- com #  count data matrix/data frame
-
 dds <- DESeqDataSetFromMatrix(countData = com,
                               colData = meta,
                               design = ~ contamination)
@@ -40,6 +38,7 @@ dds <- DESeq(dds)
 
 # Conduct differential analysis
 res <- results(dds)
+res_df <- as.data.frame(res)
 res_df$asv_id <- rownames(res_df)
 
 # Volcano plot
@@ -51,7 +50,7 @@ volcano <- ggplot(data = res_df, aes(x = log2FoldChange, y = -log10(pvalue))) +
          y = "-Log10 p-value",
          title = "Volcano Plot",
          subtitle = "Differential Abundance Analysis") +
-    theme_light()+
+    theme_light() +
     theme(plot.title = element_text(face = "bold", size = 14),
           plot.subtitle = element_text(size = 12),
           axis.title = element_text(face = "bold", size = 12),
@@ -67,3 +66,4 @@ write.csv(res_df, file = here('out', 'DA_results.csv'))
 
 
 print('concluded exporting results ... analysis complete')
+
