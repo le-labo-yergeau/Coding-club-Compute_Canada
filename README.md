@@ -1,4 +1,4 @@
-# Coding Club - Submiting RScripts as jobs to Compute Canada clusters
+# Coding Club - Submitting RScripts as jobs to Compute Canada clusters
 Workshop materials for submitting RScript jobs to Compute Canada 
 
 In this workshop I will guide participants through the following objectives:
