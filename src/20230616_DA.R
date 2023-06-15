@@ -1,7 +1,25 @@
+
+### to work on a cluster, need to load packages within script, installed using R interactive mode
+# The code combines data loading, manipulation, and file exports.
+### Run on the cluster using split_contrasts.sh from the code folder: 
+
+## 1) connect to graham on your terminal: ssh -vvv -Y username@graham.computecanada.ca
+## 2) Navigate to the folder: cd projects/def-profname-ab/yourusername/
+## 3) Create a folder "test": mkdir test
+
+#### In a new terminal tab: 
+## 2) transfer the 20230616_DA.R and the 20230616_DA.sh scripts as well as the data 
+## to the test folder using the scp or sftp protocols as described in notes.txt
+
+## 3) connect to graham on your terminal: ssh -vvv -Y username@graham.computecanada.ca
+## 4) Navigate to the folder: cd projects/def-profname-ab/youruser/test
+## 5) Submit the job: sbatch 20230616_DA.sh
+
+
+
+
 library(here)
 library(tidyverse)
-library(ggrepel)
-library(roperators)
 library(DESeq2)
 
 # ------------------ Load data ------------------
