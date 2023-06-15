@@ -1,0 +1,144 @@
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 1/6 : IN THE CLUSTER --- INTERACTIVE R SESSION TO DOWNLOAD PACKAGES
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+## 1: Connect using your credentials # If it doesn't work use: ssh -vvv -Y username@graham.computecanada.ca
+ssh -Y username@graham.computecanada.ca 
+
+## 2: Open an interactive R session. Run line by line
+module spider r
+module load gcc/9.3.0 r/4.0.2
+R
+
+## 3: Run the following lines of R code in the console one by one
+install.packages("pacman") 
+
+## 4: When prompted to select a mirror, wait until a popup window opens and click the mirror of your choice. 
+
+pacman::p_load(ggplot2)
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")mkr
+BiocManager::install("DESeq2")
+
+## 5:  When finished, quit the R session
+q()
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 2/6 : IN THE CLUSTER --- CREATE A FOLDER FOR YOUR ANALYSIS
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+## 6: Navigate to you user folder changing your user name in the 
+cd projects/<def-profname-ab>/<yourusername>/
+
+## 7: Create a test folder to hold your data and your scripts
+mkdir test
+
+## 8: Change into that new directory (test). This is where we will run our analysis from now on!
+cd test
+
+## 9: print the working directory, and copy the output, we will need it later 
+pwd
+
+
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 3/6 : IN A NEW TERMINAL TAB --- TRANSFER YOUR DATA AND SCRIPTS
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+## 10: transfer the 20230616_DA.R 20230616_DA.sh scripts as well as the data to the test folder
+
+
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 4/6 : RETURN TO CLUSTER TAB -- SUBMIT THE JOB TO SLURM
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# if you have your cluster session still open, proceed to step 11, other wise to step 13
+
+## 11: you can check that the files uploaded correctly:
+ls
+## 12: If all files are ok, you can proceed to submit the job:
+sbatch 20230616_DA.sh
+## Copy and register the job id, you will need it for the next steps
+
+###### Proceed to next section #############
+
+
+## 13: connect to graham on your terminal: 
+ssh -Y username@graham.computecanada.ca
+## 14: Navigate to the folder: 
+cd projects/def-profname-ab/youruser/test
+## 15: Submit the job:
+sbatch 20230616_DA.sh
+## Copy and register the job id, you will need it for the next steps
+
+###### Proceed to next section #############
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 5/6 : CHECKING YOUR JOB
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+## 16: Find the status of your job:
+sq  
+
+## 17: Get your job statistics once it is complete
+seff <jobid>
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+# SECTION 6/6 : COLLECT YOUR RESULTS AND OUTPUT FILES WITH sftp
+
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+
+#### Collect your outputs with sftp #############
+
+## 18: in a new terminal tab, create a secure connection:
+
+
+# This will create a new tunnel connection between your local machine and the cluster. 
+## 19: You can use basic commands to navigate in the cluster: 
+
+ls 
+
+## 20:  and also to navigate in your computer
+
+lcd OneDrive/2_Profesional/01_INRS_PostDoc/06_Coding-club/ComputeCanada/Coding-club-Compute_Canada/cluster
+lpwd
+
+## 21: to download files from the cluster, we use the get command after 
+## navigating to the appropriate directories in your local computer and in the cluster
+
+get slurm-7141270.out
+get DA_results.csv
+get volcano_plot.pdf
+get slurm-7141287.out
+
+## 22: We can also use the sftp protocol to copy our data and scripts to our remote directory using put, after navigating to the corresponding directories:
+lcd /Users/saracorrea/OneDrive/2_Profesional/01_INRS_PostDoc/06_Coding-club/ComputeCanada/Coding-club-Compute_Canada/cluster
+
+## 23: Paste this file into the cluster test folder
+put notes.txt
+
+## 24: When finished, close the sftp protocol with the exit or bye command
+exit
