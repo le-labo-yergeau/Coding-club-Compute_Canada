@@ -47,6 +47,7 @@ cd test
 ## 9: print the working directory, and copy the output, we will need it later 
 pwd
 
+ **   /home/username/projects/def-profname-ab/username/test   **
 
 
 # ---------------------------------------------------------------------
@@ -59,6 +60,10 @@ pwd
 
 ## 10: transfer the 20230616_DA.R 20230616_DA.sh scripts as well as the data to the test folder
 
+scp com.csv username@graham.computecanada.ca:/home/username/projects/def-profname-ab/username/test
+scp metadata.csv username@graham.computecanada.ca:/home/username/projects/def-profname-ab/username/test
+scp 20230616_DA_cluster.R username@graham.computecanada.ca:/home/username/projects/def-profname-ab/username/test
+scp 20230616_DA.sh username@graham.computecanada.ca:/home/username/projects/def-profname-ab/username/test
 
 
 # ---------------------------------------------------------------------
@@ -115,11 +120,13 @@ seff <jobid>
 
 ## 18: in a new terminal tab, create a secure connection:
 
+sftp username@graham.computecanada.ca
 
 # This will create a new tunnel connection between your local machine and the cluster. 
 ## 19: You can use basic commands to navigate in the cluster: 
 
 ls 
+cd projects/def-profname-ab/username/test
 
 ## 20:  and also to navigate in your computer
 
@@ -136,6 +143,7 @@ get slurm-7141287.out
 
 ## 22: We can also use the sftp protocol to copy our data and scripts to our remote directory using put, after navigating to the corresponding directories:
 lcd /Users/saracorrea/OneDrive/2_Profesional/01_INRS_PostDoc/06_Coding-club/ComputeCanada/Coding-club-Compute_Canada/cluster
+cd /project/1234567/username/test
 
 ## 23: Paste this file into the cluster test folder
 put notes.txt
