@@ -17,6 +17,19 @@ R
 ## 3: Run the following lines of R code in the console one by one
 install.packages("pacman") 
 
+If you receive a message such as the message below, when prompted to use a personal library instead, indicate "y":
+
+Installing package into ‘/usr/local/lib/R/site-library’
+(as ‘lib’ is unspecified)
+Warning in install.packages("random") :
+'lib = "/usr/local/lib/R/site-library"' is not writable
+
+Would you like to use a personal library instead?  (y/n) y
+
+Would you like to create a personal library
+~/R/pc-linux-gnu-library/3.2
+to install packages into?  (y/n) y
+
 ## 4: When prompted to select a mirror, wait until a popup window opens and click the mirror of your choice. 
 
 pacman::p_load(ggplot2)
