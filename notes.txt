@@ -17,11 +17,11 @@ R
 ## 3: Run the following lines of R code in the console one by one
 install.packages("pacman") 
 
-## 4: When prompted to select a mirror, wait until a popup window opens and click the mirror of your choice. 
+## 4: When prompted to select a mirror, wait until a popup window opens and click the mirror of your choice. If your get an error such as the library is non writeable, and get prompted with a question about using your personal library, say yes [y], then [y] again.
 
 pacman::p_load(ggplot2)
 if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")mkr
+    install.packages("BiocManager")
 BiocManager::install("DESeq2")
 
 ## 5:  When finished, quit the R session
